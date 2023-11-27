@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */; };
 		2AEAEF092B14A1B4009F2EB5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */; };
-		2AEAEF0B2B14A1B4009F2EB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF0A2B14A1B4009F2EB5 /* ViewController.swift */; };
-		2AEAEF0E2B14A1B4009F2EB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEAEF0C2B14A1B4009F2EB5 /* Main.storyboard */; };
+		2AEAEF0B2B14A1B4009F2EB5 /* APODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */; };
 		2AEAEF112B14A1B4009F2EB5 /* APOD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF0F2B14A1B4009F2EB5 /* APOD.xcdatamodeld */; };
 		2AEAEF132B14A1B6009F2EB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEAEF122B14A1B6009F2EB5 /* Assets.xcassets */; };
 		2AEAEF162B14A1B6009F2EB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEAEF142B14A1B6009F2EB5 /* LaunchScreen.storyboard */; };
+		2AF3BA092B14A63700E5F32C /* APODModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3BA082B14A63700E5F32C /* APODModel.swift */; };
+		2AF3BA0C2B14A70700E5F32C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3BA0B2B14A70700E5F32C /* NetworkManager.swift */; };
+		2AF3BA102B14B32A00E5F32C /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF3BA0F2B14B32A00E5F32C /* SDWebImage */; };
+		2AF3BA122B14B32A00E5F32C /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF3BA112B14B32A00E5F32C /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2AEAEF032B14A1B4009F2EB5 /* APOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APOD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2AEAEF0A2B14A1B4009F2EB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2AEAEF0D2B14A1B4009F2EB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODViewController.swift; sourceTree = "<group>"; };
 		2AEAEF102B14A1B4009F2EB5 /* APOD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = APOD.xcdatamodel; sourceTree = "<group>"; };
 		2AEAEF122B14A1B6009F2EB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AEAEF152B14A1B6009F2EB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AEAEF172B14A1B6009F2EB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AF3BA082B14A63700E5F32C /* APODModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODModel.swift; sourceTree = "<group>"; };
+		2AF3BA0B2B14A70700E5F32C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF3BA122B14B32A00E5F32C /* SDWebImageMapKit in Frameworks */,
+				2AF3BA102B14B32A00E5F32C /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,16 +64,49 @@
 		2AEAEF052B14A1B4009F2EB5 /* APOD */ = {
 			isa = PBXGroup;
 			children = (
-				2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */,
-				2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */,
-				2AEAEF0A2B14A1B4009F2EB5 /* ViewController.swift */,
-				2AEAEF0C2B14A1B4009F2EB5 /* Main.storyboard */,
+				2AF3BA0A2B14A64200E5F32C /* Model */,
+				2AEAEF1D2B14A22A009F2EB5 /* AppDelegate */,
+				2AEAEF1E2B14A233009F2EB5 /* Controller */,
 				2AEAEF122B14A1B6009F2EB5 /* Assets.xcassets */,
+				2AF3BA0D2B14A70C00E5F32C /* NetworkManager */,
 				2AEAEF142B14A1B6009F2EB5 /* LaunchScreen.storyboard */,
 				2AEAEF172B14A1B6009F2EB5 /* Info.plist */,
 				2AEAEF0F2B14A1B4009F2EB5 /* APOD.xcdatamodeld */,
 			);
 			path = APOD;
+			sourceTree = "<group>";
+		};
+		2AEAEF1D2B14A22A009F2EB5 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */,
+				2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2AEAEF1E2B14A233009F2EB5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2AF3BA0A2B14A64200E5F32C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AF3BA082B14A63700E5F32C /* APODModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AF3BA0D2B14A70C00E5F32C /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				2AF3BA0B2B14A70700E5F32C /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +125,10 @@
 			dependencies = (
 			);
 			name = APOD;
+			packageProductDependencies = (
+				2AF3BA0F2B14B32A00E5F32C /* SDWebImage */,
+				2AF3BA112B14B32A00E5F32C /* SDWebImageMapKit */,
+			);
 			productName = APOD;
 			productReference = 2AEAEF032B14A1B4009F2EB5 /* APOD.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +157,9 @@
 				Base,
 			);
 			mainGroup = 2AEAEEFA2B14A1B4009F2EB5;
+			packageReferences = (
+				2AF3BA0E2B14B32A00E5F32C /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 2AEAEF042B14A1B4009F2EB5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -130,7 +176,6 @@
 			files = (
 				2AEAEF162B14A1B6009F2EB5 /* LaunchScreen.storyboard in Resources */,
 				2AEAEF132B14A1B6009F2EB5 /* Assets.xcassets in Resources */,
-				2AEAEF0E2B14A1B4009F2EB5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,9 +186,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AEAEF0B2B14A1B4009F2EB5 /* ViewController.swift in Sources */,
+				2AF3BA0C2B14A70700E5F32C /* NetworkManager.swift in Sources */,
+				2AEAEF0B2B14A1B4009F2EB5 /* APODViewController.swift in Sources */,
 				2AEAEF112B14A1B4009F2EB5 /* APOD.xcdatamodeld in Sources */,
 				2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */,
+				2AF3BA092B14A63700E5F32C /* APODModel.swift in Sources */,
 				2AEAEF092B14A1B4009F2EB5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,14 +198,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2AEAEF0C2B14A1B4009F2EB5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2AEAEF0D2B14A1B4009F2EB5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2AEAEF142B14A1B6009F2EB5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -301,7 +340,6 @@
 				INFOPLIST_FILE = APOD/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -329,7 +367,6 @@
 				INFOPLIST_FILE = APOD/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -367,6 +404,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2AF3BA0E2B14B32A00E5F32C /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2AF3BA0F2B14B32A00E5F32C /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF3BA0E2B14B32A00E5F32C /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		2AF3BA112B14B32A00E5F32C /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF3BA0E2B14B32A00E5F32C /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2AEAEF0F2B14A1B4009F2EB5 /* APOD.xcdatamodeld */ = {
