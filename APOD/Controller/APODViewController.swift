@@ -26,6 +26,18 @@ class APODViewController: UIViewController {
         return textView
     }()
     
+    private let dateLabel: UILabel = UILabel()
+    private let copyrightLabel: UILabel = UILabel()
+    var currentAPOD: APOD?
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -40,7 +52,6 @@ class APODViewController: UIViewController {
         
         // Add scrollView
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemCyan
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
@@ -50,21 +61,23 @@ class APODViewController: UIViewController {
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        // Add a vertical stack view
-        let stackView = UIStackView()
-        stackView.backgroundColor = .systemYellow
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
         
         // Add imageView to the stack view
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
+//        Add dateLabel to stack view
+        stackView.addArrangedSubview(dateLabel)
+        
+//        Add copyrightLabel to stack view
+        stackView.addArrangedSubview(copyrightLabel)
+        
         // Add explanationTextView to the stack view
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
+        
+        setupFavoriteButton()
         
         // Set stack view constraints
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
@@ -84,6 +97,8 @@ class APODViewController: UIViewController {
     }
     
     func updateUI(with apod: APOD) {
+        currentAPOD = apod
+        
         imageView.image = nil
         
         if let imageUrl = URL(string: apod.url) {
@@ -91,14 +106,46 @@ class APODViewController: UIViewController {
             imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
                 if let error = error {
                     print("Error loading image: \(error.localizedDescription)")
-                }}
+                }
+            }
+            
         }
         print("url.apod")
         
+//        Format date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyy-MM-dd"
+        if let inputDate = dateFormatter.date(from: apod.date) {
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            let formattedDate = dateFormatter.string(from: inputDate)
+            dateLabel.text =  formattedDate
+        }
+        
+        copyrightLabel.text = apod.copyright.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("Copyright Label :\(apod.copyright)")
         
         explanationTextView.text = apod.explanation
     }
     
+    //MARK: - Core Data
+    func setupFavoriteButton() {
+        let favoriteButton = UIButton()
+        favoriteButton.setTitle("Add to Favorites", for: .normal)
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        stackView.addArrangedSubview(favoriteButton)
+    }
+    
+    @objc func addToFavorites() {
+        if let currentAPOD = currentAPOD {
+            CoreDataManager.shared.saveToCoreData(apod: currentAPOD)
+        } else {
+            print("Error: currentAPOD is nil.")
+        }
+    }
+    
+    
 }
+
+
 
 

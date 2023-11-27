@@ -13,5 +13,4 @@ struct APOD: Codable {
     let explanation: String
     let url: String
     let copyright: String
-//    let date: String?
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A4E2D8C2B150EEE0099D2EE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E2D8B2B150EEE0099D2EE /* CoreDataManager.swift */; };
 		2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */; };
 		2AEAEF092B14A1B4009F2EB5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */; };
 		2AEAEF0B2B14A1B4009F2EB5 /* APODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A4E2D8B2B150EEE0099D2EE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2AEAEF032B14A1B4009F2EB5 /* APOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APOD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */ = {
+			isa = PBXGroup;
+			children = (
+				2A4E2D8B2B150EEE0099D2EE /* CoreDataManager.swift */,
+			);
+			path = CoreDataHelper;
+			sourceTree = "<group>";
+		};
 		2AEAEEFA2B14A1B4009F2EB5 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +81,7 @@
 				2AF3BA0D2B14A70C00E5F32C /* NetworkManager */,
 				2AEAEF142B14A1B6009F2EB5 /* LaunchScreen.storyboard */,
 				2AEAEF172B14A1B6009F2EB5 /* Info.plist */,
+				2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */,
 				2AEAEF0F2B14A1B4009F2EB5 /* APOD.xcdatamodeld */,
 			);
 			path = APOD;
@@ -159,6 +170,7 @@
 			mainGroup = 2AEAEEFA2B14A1B4009F2EB5;
 			packageReferences = (
 				2AF3BA0E2B14B32A00E5F32C /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2AF3BA132B14E93800E5F32C /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 			);
 			productRefGroup = 2AEAEF042B14A1B4009F2EB5 /* Products */;
 			projectDirPath = "";
@@ -191,6 +203,7 @@
 				2AEAEF112B14A1B4009F2EB5 /* APOD.xcdatamodeld in Sources */,
 				2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */,
 				2AF3BA092B14A63700E5F32C /* APODModel.swift in Sources */,
+				2A4E2D8C2B150EEE0099D2EE /* CoreDataManager.swift in Sources */,
 				2AEAEF092B14A1B4009F2EB5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +425,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.18.5;
+			};
+		};
+		2AF3BA132B14E93800E5F32C /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thii/SwiftHEXColors";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
