@@ -12,7 +12,9 @@ class APODViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -36,20 +38,41 @@ class APODViewController: UIViewController {
         view.backgroundColor = .systemPurple
         navigationController?.navigationBar.tintColor = .label
         
-        // Add imageView
-        view.addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        // Add scrollView
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .systemCyan
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
         
-        //        Add descriptionView
-        view.addSubview(explanationTextView)
-        explanationTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
-        explanationTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        explanationTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        explanationTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        // Set scrollView constraints
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        // Add a vertical stack view
+        let stackView = UIStackView()
+        stackView.backgroundColor = .systemYellow
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
+        
+        // Add imageView to the stack view
+        stackView.addArrangedSubview(imageView)
+        imageView.contentMode = .scaleAspectFit
+        
+        // Add explanationTextView to the stack view
+        stackView.addArrangedSubview(explanationTextView)
+        explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
+        
+        // Set stack view constraints
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16).isActive = true
     }
+    
     
     func fetchAPOD() {
         NetworkManager.fetchData(url: NetworkManager.api) {
@@ -63,12 +86,19 @@ class APODViewController: UIViewController {
     func updateUI(with apod: APOD) {
         imageView.image = nil
         
-        if let imageUrl = URL(string: apod.hdurl) {
-            imageView.sd_setImage(with: imageUrl) {_, _, _, _ in }
+        if let imageUrl = URL(string: apod.url) {
+            print("Image URL: \(imageUrl)")
+            imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
+                if let error = error {
+                    print("Error loading image: \(error.localizedDescription)")
+                }}
         }
+        print("url.apod")
+        
+        
         explanationTextView.text = apod.explanation
     }
     
-    
 }
+
 
