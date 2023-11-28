@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import CoreData
 
 class APODViewController: UIViewController {
     
@@ -85,7 +86,7 @@ class APODViewController: UIViewController {
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
         
         setupFavoriteButton()
     }

@@ -5,5 +5,6 @@
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="explanation" optional="YES" attributeType="String"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
 </model>

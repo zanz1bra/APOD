@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let randomDateVC = UIViewController()
         randomDateVC.view.backgroundColor = .systemRed
         
-        let favoritesVC = UIViewController()
-        favoritesVC.view.backgroundColor = .systemBlue
+        let favoritesVC = FavoritesTableViewController()
+        favoritesVC.view.backgroundColor = .systemGray
         
         let specificDateVC = UIViewController()
         specificDateVC.view.backgroundColor = .systemMint
@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBarController.viewControllers = [apodViewController, randomDateVC, favoritesVC, specificDateVC]
         
-        let navigationController = UINavigationController(rootViewController: apodViewController)
+//        let navigationController = UINavigationController(rootViewController: apodViewController)
         window?.rootViewController = tabBarController
         
         window?.makeKeyAndVisible()
