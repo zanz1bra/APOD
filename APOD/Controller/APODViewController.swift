@@ -10,6 +10,8 @@ import SDWebImage
 
 class APODViewController: UIViewController {
     
+    var currentAPOD: APOD?
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -28,7 +30,6 @@ class APODViewController: UIViewController {
     
     private let dateLabel: UILabel = UILabel()
     private let copyrightLabel: UILabel = UILabel()
-    var currentAPOD: APOD?
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -40,10 +41,14 @@ class APODViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         setupView()
-        // Do any additional setup after loading the view.
         fetchAPOD()
+        setupTabBarItem()
     }
+    
+    //MARK: - Setup View
     
     func setupView() {
         title = "Astronomy Picture of the Day"
@@ -55,7 +60,6 @@ class APODViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
-        // Set scrollView constraints
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -77,15 +81,22 @@ class APODViewController: UIViewController {
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
         
-        setupFavoriteButton()
-        
         // Set stack view constraints
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16).isActive = true
+        
+        setupFavoriteButton()
     }
     
+    func setupTabBarItem() {
+        let apodTabBarItem = UITabBarItem(title: "APOD", image: UIImage(systemName: "photo.fill"), selectedImage: nil)
+        self.tabBarItem = apodTabBarItem
+    }
+
+    
+    //MARK: - Fetching data
     
     func fetchAPOD() {
         NetworkManager.fetchData(url: NetworkManager.api) {
@@ -95,6 +106,8 @@ class APODViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Update UI after fetching data
     
     func updateUI(with apod: APOD) {
         currentAPOD = apod
@@ -128,6 +141,7 @@ class APODViewController: UIViewController {
     }
     
     //MARK: - Core Data
+    
     func setupFavoriteButton() {
         let favoriteButton = UIButton()
         favoriteButton.setTitle("Add to Favorites", for: .normal)
@@ -142,7 +156,6 @@ class APODViewController: UIViewController {
             print("Error: currentAPOD is nil.")
         }
     }
-    
     
 }
 
