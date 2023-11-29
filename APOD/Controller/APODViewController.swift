@@ -54,7 +54,7 @@ class APODViewController: UIViewController {
     
     func setupView() {
         title = "Astronomy Picture of the Day"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGray
         navigationController?.navigationBar.tintColor = .label
         
         // Add scrollView

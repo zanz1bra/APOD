@@ -18,12 +18,6 @@ class FavoritesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: cellID)
         fetchAndDisplayFavorites()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -46,15 +40,15 @@ class FavoritesTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+//    MARK: - Deleting item from Favorites and Core Data
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteFavorite(at: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
-    */
     
+//    MARK: - Core Data methods
     func fetchAndDisplayFavorites() {
         favorites = CoreDataManager.shared.fetchFavorites()
         tableView.reloadData()
@@ -66,9 +60,9 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     func deleteFavorite(at indexPath: IndexPath) {
-        let favorite = favorites[indexPath.row]
+        let favorite = favorites.remove(at: indexPath.row)
         CoreDataManager.shared.deleteFavorite(apod: favorite)
-        fetchAndDisplayFavorites()
+//        fetchAndDisplayFavorites()
     }
 
 }
