@@ -16,8 +16,10 @@ class FavoritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: cellID)
         fetchAndDisplayFavorites()
+
     }
 
     // MARK: - Table view data source
@@ -43,9 +45,21 @@ class FavoritesTableViewController: UITableViewController {
 //    MARK: - Deleting item from Favorites and Core Data
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteFavorite(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            showDeleteAlert(at: indexPath)
+//            deleteFavorite(at: indexPath)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    func showDeleteAlert(at indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Delete Favorite", message: "Are you sure you want to delete this favorite?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
+            self.deleteFavorite(at: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }))
+        
+        present(alert, animated: true, completion: nil)
     }
     
 //    MARK: - Core Data methods
@@ -62,7 +76,6 @@ class FavoritesTableViewController: UITableViewController {
     func deleteFavorite(at indexPath: IndexPath) {
         let favorite = favorites.remove(at: indexPath.row)
         CoreDataManager.shared.deleteFavorite(apod: favorite)
-//        fetchAndDisplayFavorites()
     }
 
 }

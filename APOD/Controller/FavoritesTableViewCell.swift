@@ -73,6 +73,8 @@ class FavoritesTableViewCell: UITableViewCell {
             textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8),
             textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//            textStackView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
+//            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
     
