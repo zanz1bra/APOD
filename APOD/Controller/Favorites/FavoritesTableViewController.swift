@@ -42,12 +42,22 @@ class FavoritesTableViewController: UITableViewController {
         return cell
     }
     
+//    MARK: - Navigation to detail view
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favorite = favorites[indexPath.row]
+
+        let detailViewController = FavoritesDetailViewController()
+        detailViewController.apod = favorite
+
+        // Present the DetailViewController modally
+        present(detailViewController, animated: true, completion: nil)
+    }
+    
 //    MARK: - Deleting item from Favorites and Core Data
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             showDeleteAlert(at: indexPath)
-//            deleteFavorite(at: indexPath)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
