@@ -36,8 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         
         tabBarController.viewControllers = [apodViewController, randomDateVC, favoritesVC, specificDateVC]
-        
-//        let navigationController = UINavigationController(rootViewController: apodViewController)
+
         window?.rootViewController = tabBarController
         
         window?.makeKeyAndVisible()

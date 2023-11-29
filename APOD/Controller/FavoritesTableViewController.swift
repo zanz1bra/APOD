@@ -29,12 +29,10 @@ class FavoritesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return favorites.count
     }
 
@@ -43,10 +41,7 @@ class FavoritesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! FavoritesTableViewCell
         let favorite = favorites[indexPath.row]
         
-        if let imageUrl = favorite.imageUrl, let url = URL(string: imageUrl) {
-            cell.imageView?.sd_setImage(with: url, placeholderImage: UIImage(systemName: "circle.and.line.horizontal.fill"))
-        }
-        cell.textLabel?.text = favorite.title
+        cell.configure(with: favorite)
 
         return cell
     }

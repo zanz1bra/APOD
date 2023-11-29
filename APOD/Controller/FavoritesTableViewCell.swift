@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FavoritesTableViewCell: UITableViewCell {
     
@@ -28,7 +29,7 @@ class FavoritesTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 8)
         return label
     }()
     
@@ -36,7 +37,7 @@ class FavoritesTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 12)
         label.numberOfLines = 0
         return label
     } ()
@@ -63,14 +64,34 @@ class FavoritesTableViewCell: UITableViewCell {
             customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             customImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            customImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 4) // Adjust the multiplier to make the image smaller
+            customImageView.widthAnchor.constraint(equalToConstant: 50), 
+            customImageView.heightAnchor.constraint(equalTo: customImageView.widthAnchor, multiplier: 1.0),
         ])
         
         // Set up constraints for the stack view
         NSLayoutConstraint.activate([
             textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8),
             textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
+    }
+    
+    func configure(with favorite: FavoriteAPOD) {
+        if let imageUrl = favorite.imageUrl, let url = URL(string: imageUrl) {
+            customImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "circle.and.line.horizontal.fill"))
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let inputDate = dateFormatter.date(from: favorite.date!) {
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            let formattedDate = dateFormatter.string(from: inputDate)
+            dateLabel.text = formattedDate
+        }
+        
+        titleLabel.text = favorite.title
+        
+        print("Favorite Title: \(favorite.title ?? "No title")")
+        print("Favorite Date: \(favorite.date ?? "No date")")
     }
 }

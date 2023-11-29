@@ -29,6 +29,7 @@ class APODViewController: UIViewController {
         return textView
     }()
     
+    private let titleLabel: UILabel = UILabel()
     private let dateLabel: UILabel = UILabel()
     private let copyrightLabel: UILabel = UILabel()
     
@@ -53,7 +54,7 @@ class APODViewController: UIViewController {
     
     func setupView() {
         title = "Astronomy Picture of the Day"
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .label
         
         // Add scrollView
@@ -72,13 +73,11 @@ class APODViewController: UIViewController {
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
-//        Add dateLabel to stack view
+
+        stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dateLabel)
-        
-//        Add copyrightLabel to stack view
         stackView.addArrangedSubview(copyrightLabel)
-        
-        // Add explanationTextView to the stack view
+
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
         
@@ -126,9 +125,11 @@ class APODViewController: UIViewController {
         }
         print("url.apod")
         
+        titleLabel.text = apod.title
+        
 //        Format date
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         if let inputDate = dateFormatter.date(from: apod.date) {
             dateFormatter.dateFormat = "dd MMMM yyyy"
             let formattedDate = dateFormatter.string(from: inputDate)
