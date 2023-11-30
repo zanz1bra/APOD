@@ -92,16 +92,17 @@ class SpecificDateViewController: UIViewController {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
-        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
-        alertController.view.addSubview(datePicker)
+        let lastDate = Calendar.current.date(from: DateComponents(year: 1995, month: 6, day: 20)) ?? Date()
+        datePicker.minimumDate = lastDate
         
         let doneAction = UIAlertAction(title: "Done", style: .default) { _ in
             let selectedDate = datePicker.date
             self.fetchSpecificDateAPOD(date: self.formattedDate(selectedDate))
         }
         
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        alertController.view.addSubview(datePicker)
         alertController.addAction(doneAction)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -109,10 +110,7 @@ class SpecificDateViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        
-    }
+
     
     func formattedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
