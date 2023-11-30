@@ -13,6 +13,18 @@ class RandomDateViewController: UIViewController {
     
     var randomAPOD: APOD?
     
+    var refreshButton: UIButton!
+    
+    let buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.backgroundColor = .systemGray2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -51,15 +63,6 @@ class RandomDateViewController: UIViewController {
     
     func setupView() {
         
-        let refreshButton = UIButton()
-        refreshButton.setTitle("New picture", for: .normal)
-        refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
-        refreshButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(refreshButton)
-        
-        refreshButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        refreshButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
-        
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -67,7 +70,7 @@ class RandomDateViewController: UIViewController {
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: refreshButton.topAnchor, constant: -8).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         scrollView.addSubview(stackView)
 
@@ -80,16 +83,26 @@ class RandomDateViewController: UIViewController {
         
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false
+        stackView.addArrangedSubview(buttonsStackView)
         
-        // Set stack view constraints
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         stackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -40).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
         
+        buttonsStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        buttonsStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        
+        let refreshButton = UIButton()
+        refreshButton.setTitle("New picture", for: .normal)
+        refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.addArrangedSubview(refreshButton)
+        
         setupFavoriteButton()
     }
+
     
     //    MARK: - Fetching data
     
@@ -156,7 +169,8 @@ class RandomDateViewController: UIViewController {
         let favoriteButton = UIButton()
         favoriteButton.setTitle("Add to Favorites", for: .normal)
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-        stackView.addArrangedSubview(favoriteButton)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.addArrangedSubview(favoriteButton)
     }
     
     @objc func addToFavorites() {
