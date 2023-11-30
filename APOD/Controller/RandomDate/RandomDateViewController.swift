@@ -1,17 +1,17 @@
 //
-//  ViewController.swift
+//  RandomDateViewController.swift
 //  APOD
 //
-//  Created by erika.talberga on 27/11/2023.
+//  Created by erika.talberga on 30/11/2023.
 //
 
 import UIKit
 import SDWebImage
 import CoreData
 
-class APODViewController: UIViewController {
+class RandomDateViewController: UIViewController {
     
-    var currentAPOD: APOD?
+    var randomAPOD: APOD?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -43,60 +43,72 @@ class APODViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         setupView()
         fetchAPOD()
-        setupTabBarItem()
     }
     
-    //MARK: - Setup View
-    
     func setupView() {
-        title = "Astronomy Picture of the Day"
-        view.backgroundColor = .systemGray
-        navigationController?.navigationBar.tintColor = .label
         
-        // Add scrollView
+//        let buttonContainerView = UIView()
+//        buttonContainerView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(buttonContainerView)
+//        
+//        buttonContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        buttonContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        buttonContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        let refreshButton = UIButton()
+        refreshButton.setTitle("New picture", for: .normal)
+        refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(refreshButton)
+
+        refreshButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        refreshButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        
+//        let favoriteButton = UIButton()
+//        favoriteButton.setTitle("Add to Favorites", for: .normal)
+//        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+//        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+//        buttonContainerView.addSubview(favoriteButton)
+//        
+//        favoriteButton.leadingAnchor.constraint(equalTo: refreshButton.trailingAnchor, constant: 8).isActive = true
+//        favoriteButton.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor, constant: -16).isActive = true
+//        favoriteButton.bottomAnchor.constraint(equalTo: buttonContainerView.bottomAnchor, constant: -8).isActive = true
+//        favoriteButton.widthAnchor.constraint(equalTo: refreshButton.widthAnchor).isActive = true
+        
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 8).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         scrollView.addSubview(stackView)
-        
-        // Add imageView to the stack view
+
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
-
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dateLabel)
         stackView.addArrangedSubview(copyrightLabel)
-
+        
         stackView.addArrangedSubview(explanationTextView)
-        explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
+        explanationTextView.isScrollEnabled = false
         
         // Set stack view constraints
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
+        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
         
         setupFavoriteButton()
     }
     
-    func setupTabBarItem() {
-        let apodTabBarItem = UITabBarItem(title: "APOD", image: UIImage(systemName: "photo.fill"), selectedImage: nil)
-        self.tabBarItem = apodTabBarItem
-    }
-
-    
-    //MARK: - Fetching data
+    //    MARK: - Fetching data
     
     func fetchAPOD() {
         NetworkManager.fetchData(url: NetworkManager.api) {
@@ -107,10 +119,19 @@ class APODViewController: UIViewController {
         }
     }
     
-    //MARK: - Update UI after fetching data
+    func fetchRandomAPOD() {
+        NetworkManager.fetchRandomDate { randomAPOD in
+            DispatchQueue.main.async {
+                self.updateUI(with: randomAPOD)
+            }
+        }
+    }
+    
+
+    //    MARK: - Update UI after fetching data
     
     func updateUI(with apod: APOD) {
-        currentAPOD = apod
+        randomAPOD = apod
         
         imageView.image = nil
         
@@ -127,7 +148,7 @@ class APODViewController: UIViewController {
         
         titleLabel.text = apod.title
         
-//        Format date
+        //        Format date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let inputDate = dateFormatter.date(from: apod.date) {
@@ -144,10 +165,10 @@ class APODViewController: UIViewController {
         }
         
         explanationTextView.text = apod.explanation
+        
     }
     
-    //MARK: - Core Data
-    
+    //    MARK: - Adding to Favorites
     func setupFavoriteButton() {
         let favoriteButton = UIButton()
         favoriteButton.setTitle("Add to Favorites", for: .normal)
@@ -156,15 +177,18 @@ class APODViewController: UIViewController {
     }
     
     @objc func addToFavorites() {
-        if let currentAPOD = currentAPOD {
-            CoreDataManager.shared.saveToCoreData(apod: currentAPOD)
+        if let randomAPOD = randomAPOD {
+            CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
         } else {
-            print("Error: currentAPOD is nil.")
+            print("Error: randomAPOD is nil.")
         }
     }
     
+    
+    //MARK: - Fetching random APOD
+    @objc func refreshButtonTapped() {
+        fetchRandomAPOD()
+        print("Refresh button tapped")
+    }
+    
 }
-
-
-
-

@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let apodViewController = APODViewController()
         
-        let randomDateVC = UIViewController()
-        randomDateVC.view.backgroundColor = .systemRed
+        let randomDateVC = RandomDateViewController()
+        randomDateVC.view.backgroundColor = .systemGray3
         
         let favoritesVC = FavoritesTableViewController()
         favoritesVC.view.backgroundColor = .systemGray

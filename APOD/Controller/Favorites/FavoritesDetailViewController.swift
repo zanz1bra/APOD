@@ -50,7 +50,7 @@ class FavoritesDetailViewController: UIViewController {
                 imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
                 imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                 imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                imageView.heightAnchor.constraint(equalToConstant: 200), // Adjust the height as needed
+                imageView.heightAnchor.constraint(equalToConstant: 200), 
                 
                 explanationTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
                 explanationTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),

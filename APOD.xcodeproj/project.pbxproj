@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A0C5D142B18A86B00797FD6 /* RandomDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C5D132B18A86B00797FD6 /* RandomDateViewController.swift */; };
 		2A4E2D8C2B150EEE0099D2EE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E2D8B2B150EEE0099D2EE /* CoreDataManager.swift */; };
 		2A8272F02B16279F001C071A /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8272EF2B16279F001C071A /* FavoritesTableViewController.swift */; };
 		2A8272F22B163E8D001C071A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8272F12B163E8D001C071A /* FavoritesTableViewCell.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A0C5D132B18A86B00797FD6 /* RandomDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDateViewController.swift; sourceTree = "<group>"; };
 		2A4E2D8B2B150EEE0099D2EE /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2A8272EF2B16279F001C071A /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		2A8272F12B163E8D001C071A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A0C5D122B18A84900797FD6 /* RandomDate */ = {
+			isa = PBXGroup;
+			children = (
+				2A0C5D132B18A86B00797FD6 /* RandomDateViewController.swift */,
+			);
+			path = RandomDate;
+			sourceTree = "<group>";
+		};
 		2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */,
+				2A0C5D122B18A84900797FD6 /* RandomDate */,
 				2A849C022B17C084006CB746 /* Favorites */,
 			);
 			path = Controller;
@@ -220,6 +231,7 @@
 				2AEAEF0B2B14A1B4009F2EB5 /* APODViewController.swift in Sources */,
 				2A849C062B17C17E006CB746 /* FavoritesDetailViewController.swift in Sources */,
 				2AEAEF112B14A1B4009F2EB5 /* APOD.xcdatamodeld in Sources */,
+				2A0C5D142B18A86B00797FD6 /* RandomDateViewController.swift in Sources */,
 				2A8272F02B16279F001C071A /* FavoritesTableViewController.swift in Sources */,
 				2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */,
 				2AF3BA092B14A63700E5F32C /* APODModel.swift in Sources */,
