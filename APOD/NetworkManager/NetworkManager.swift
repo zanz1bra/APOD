@@ -11,8 +11,6 @@ class NetworkManager {
     static let api = "https://api.nasa.gov/planetary/apod?api_key=VJ9PD8OHGI0sLmErkzfYOYMKIhC1YPdjHUIrTeKx"
     
     static func fetchData(url: String, completion: @escaping (APOD) -> () ) {
-//        let randomDate = generateRandomDate()
-//        let urlWithRandomDate = "\(api)&date=\(randomDate)"
         
         guard let url = URL(string: url) else { return }
         

@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoritesVC = FavoritesTableViewController()
         favoritesVC.view.backgroundColor = .systemGray
         
-        let specificDateVC = UIViewController()
-        specificDateVC.view.backgroundColor = .systemMint
+        let specificDateVC = SpecificDateViewController()
+        specificDateVC.view.backgroundColor = .systemBackground
         
         apodViewController.setupTabBarItem()
         randomDateVC.tabBarItem = UITabBarItem(title: "Random Date", image: UIImage(systemName: "shuffle.circle.fill"), selectedImage: nil)

@@ -1,5 +1,5 @@
 //
-//  RandomDateViewController.swift
+//  SpecificDateViewController.swift
 //  APOD
 //
 //  Created by erika.talberga on 30/11/2023.
@@ -9,9 +9,9 @@ import UIKit
 import SDWebImage
 import CoreData
 
-class RandomDateViewController: UIViewController {
+class SpecificDateViewController: UIViewController {
     
-    var randomAPOD: APOD?
+    var specificDateAPOD: APOD?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -44,7 +44,7 @@ class RandomDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetchAPOD()
+        fetchSpecificDateAPOD(date: "2000-11-11")
     }
     
 //    MARK: - Setting up view
@@ -61,7 +61,7 @@ class RandomDateViewController: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         scrollView.addSubview(stackView)
-
+        
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
@@ -75,62 +75,49 @@ class RandomDateViewController: UIViewController {
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        stackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -40).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
-
+        
         setupFavoriteButton()
         
-        let refreshButton = UIButton()
-        refreshButton.setTitle("New picture", for: .normal)
-        refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
-        refreshButton.backgroundColor = .black
-        stackView.addArrangedSubview(refreshButton)
-        
+        let datePickerButton = UIButton()
+        datePickerButton.setTitle("Choose Date", for: .normal)
+        datePickerButton.addTarget(self, action: #selector(datePickerButtonTapped), for: .touchUpInside)
+        datePickerButton.backgroundColor = .black
+        stackView.addArrangedSubview(datePickerButton)
+
+    }
+    
+    @objc func datePickerButtonTapped() {
         
     }
-
     
-    //    MARK: - Fetching data
+//    MARK: - Fetching data
     
-    func fetchAPOD() {
-        NetworkManager.fetchData(url: NetworkManager.api) {
-            apod in
+    func fetchSpecificDateAPOD(date: String) {
+        NetworkManager.fetchData(url: "\(NetworkManager.api)&date=\(date)") { apod in
             DispatchQueue.main.async {
                 self.updateUI(with: apod)
             }
         }
     }
     
-    func fetchRandomAPOD() {
-        NetworkManager.fetchRandomDate { randomAPOD in
-            DispatchQueue.main.async {
-                self.updateUI(with: randomAPOD)
-            }
-        }
-    }
-    
-
-    //    MARK: - Update UI after fetching data
+//    MARK: - Update UI
     
     func updateUI(with apod: APOD) {
-        randomAPOD = apod
-        
+        specificDateAPOD = apod
         imageView.image = nil
         
         if let imageUrl = URL(string: apod.url) {
-            print("Image URL: \(imageUrl)")
             imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
                 if let error = error {
                     print("Error loading image: \(error.localizedDescription)")
                 }
             }
-            
         }
-        print("url.apod")
         
         titleLabel.text = apod.title
         
-        //        Format date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let inputDate = dateFormatter.date(from: apod.date) {
@@ -147,10 +134,10 @@ class RandomDateViewController: UIViewController {
         }
         
         explanationTextView.text = apod.explanation
-        
     }
     
-    //    MARK: - Adding to Favorites
+//    MARK: - Adding to Favorites
+    
     func setupFavoriteButton() {
         let favoriteButton = UIButton()
         favoriteButton.setTitle("Add to Favorites", for: .normal)
@@ -160,18 +147,13 @@ class RandomDateViewController: UIViewController {
     }
     
     @objc func addToFavorites() {
-        if let randomAPOD = randomAPOD {
-            CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
+        if let specificDateAPOD = specificDateAPOD {
+            CoreDataManager.shared.saveToCoreData(apod: specificDateAPOD)
         } else {
-            print("Error: randomAPOD is nil.")
+            print("Error: specificDateAPOD is nil.")
         }
     }
     
     
-    //MARK: - Fetching random APOD
-    @objc func refreshButtonTapped() {
-        fetchRandomAPOD()
-        print("Refresh button tapped")
-    }
     
 }
