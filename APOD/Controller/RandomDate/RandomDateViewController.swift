@@ -47,44 +47,27 @@ class RandomDateViewController: UIViewController {
         fetchAPOD()
     }
     
+//    MARK: - Setting up view
+    
     func setupView() {
-        
-//        let buttonContainerView = UIView()
-//        buttonContainerView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(buttonContainerView)
-//        
-//        buttonContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        buttonContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        buttonContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         let refreshButton = UIButton()
         refreshButton.setTitle("New picture", for: .normal)
         refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(refreshButton)
-
-        refreshButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
-        refreshButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         
-//        let favoriteButton = UIButton()
-//        favoriteButton.setTitle("Add to Favorites", for: .normal)
-//        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-//        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-//        buttonContainerView.addSubview(favoriteButton)
-//        
-//        favoriteButton.leadingAnchor.constraint(equalTo: refreshButton.trailingAnchor, constant: 8).isActive = true
-//        favoriteButton.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor, constant: -16).isActive = true
-//        favoriteButton.bottomAnchor.constraint(equalTo: buttonContainerView.bottomAnchor, constant: -8).isActive = true
-//        favoriteButton.widthAnchor.constraint(equalTo: refreshButton.widthAnchor).isActive = true
+        refreshButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        refreshButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
         
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
-        scrollView.topAnchor.constraint(equalTo: refreshButton.bottomAnchor, constant: 8).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: refreshButton.topAnchor, constant: -8).isActive = true
         
         scrollView.addSubview(stackView)
 
@@ -102,7 +85,7 @@ class RandomDateViewController: UIViewController {
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
+        stackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -40).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
         
         setupFavoriteButton()
