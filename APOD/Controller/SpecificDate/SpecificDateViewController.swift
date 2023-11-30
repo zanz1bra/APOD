@@ -89,9 +89,36 @@ class SpecificDateViewController: UIViewController {
     }
     
     @objc func datePickerButtonTapped() {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        alertController.view.addSubview(datePicker)
+        
+        let doneAction = UIAlertAction(title: "Done", style: .default) { _ in
+            let selectedDate = datePicker.date
+            self.fetchSpecificDateAPOD(date: self.formattedDate(selectedDate))
+        }
+        
+        alertController.addAction(doneAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
         
     }
     
+    func formattedDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
 //    MARK: - Fetching data
     
     func fetchSpecificDateAPOD(date: String) {
