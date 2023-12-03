@@ -12,6 +12,7 @@
 		2A8272F02B16279F001C071A /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8272EF2B16279F001C071A /* FavoritesTableViewController.swift */; };
 		2A8272F22B163E8D001C071A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8272F12B163E8D001C071A /* FavoritesTableViewCell.swift */; };
 		2A849C062B17C17E006CB746 /* FavoritesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A849C052B17C17E006CB746 /* FavoritesDetailViewController.swift */; };
+		2A865A062B1B53BE000AADD1 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A865A052B1B53BE000AADD1 /* DatePickerViewController.swift */; };
 		2AB16EBF2B190CDA00BA9CAD /* SpecificDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB16EBE2B190CDA00BA9CAD /* SpecificDateViewController.swift */; };
 		2AEAEF072B14A1B4009F2EB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */; };
 		2AEAEF092B14A1B4009F2EB5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEAEF082B14A1B4009F2EB5 /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 		2A8272EF2B16279F001C071A /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		2A8272F12B163E8D001C071A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		2A849C052B17C17E006CB746 /* FavoritesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDetailViewController.swift; sourceTree = "<group>"; };
+		2A865A052B1B53BE000AADD1 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		2AB16EBE2B190CDA00BA9CAD /* SpecificDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificDateViewController.swift; sourceTree = "<group>"; };
 		2AEAEF032B14A1B4009F2EB5 /* APOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APOD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEAEF062B14A1B4009F2EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				2AB16EBE2B190CDA00BA9CAD /* SpecificDateViewController.swift */,
+				2A865A052B1B53BE000AADD1 /* DatePickerViewController.swift */,
 			);
 			path = SpecificDate;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AF3BA0C2B14A70700E5F32C /* NetworkManager.swift in Sources */,
+				2A865A062B1B53BE000AADD1 /* DatePickerViewController.swift in Sources */,
 				2A8272F22B163E8D001C071A /* FavoritesTableViewCell.swift in Sources */,
 				2AEAEF0B2B14A1B4009F2EB5 /* APODViewController.swift in Sources */,
 				2A849C062B17C17E006CB746 /* FavoritesDetailViewController.swift in Sources */,

@@ -25,10 +25,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let favoritesVC = FavoritesTableViewController()
         favoritesVC.view.backgroundColor = .systemGray
         
-        let specificDateVC = SpecificDateViewController()
+        let specificDateVC = UINavigationController(rootViewController: DatePickerViewController())
         specificDateVC.view.backgroundColor = .systemBackground
+
         
         apodViewController.setupTabBarItem()
+        
         randomDateVC.tabBarItem = UITabBarItem(title: "Random Date", image: UIImage(systemName: "shuffle.circle.fill"), selectedImage: nil)
         favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart.circle.fill"), selectedImage: nil)
         specificDateVC.tabBarItem = UITabBarItem(title: "Specific Date", image: UIImage(systemName: "calendar.circle.fill"), selectedImage: nil)
