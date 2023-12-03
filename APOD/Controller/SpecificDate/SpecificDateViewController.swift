@@ -13,6 +13,12 @@ class SpecificDateViewController: UIViewController {
     
     var specificDateAPOD: APOD?
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    } ()
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -31,7 +37,12 @@ class SpecificDateViewController: UIViewController {
     
     private let titleLabel: UILabel = UILabel()
     private let dateLabel: UILabel = UILabel()
-    private let copyrightLabel: UILabel = UILabel()
+
+    private let copyrightTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -44,30 +55,29 @@ class SpecificDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetchSpecificDateAPOD(date: "2000-11-11")
+        fetchSpecificDateAPOD()
     }
     
 //    MARK: - Setting up view
     
     func setupView() {
-        
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
         
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        scrollView.addSubview(stackView)
         
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dateLabel)
-        stackView.addArrangedSubview(copyrightLabel)
+        
+        stackView.addArrangedSubview(copyrightTextView)
+        copyrightTextView.isScrollEnabled = false
         
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false
@@ -119,12 +129,23 @@ class SpecificDateViewController: UIViewController {
     }
 //    MARK: - Fetching data
     
-    func fetchSpecificDateAPOD(date: String) {
-        NetworkManager.fetchData(url: "\(NetworkManager.api)&date=\(date)") { apod in
+    func fetchSpecificDateAPOD(date: String? = nil) {
+        var url = NetworkManager.api
+        
+        if let selectedDate = date {
+            url += "&date=\(selectedDate)"
+        }
+        
+        NetworkManager.fetchData(url: url) { apod in
             DispatchQueue.main.async {
                 self.updateUI(with: apod)
+                self.scrollToTop()
             }
         }
+    }
+    
+    func scrollToTop() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: -scrollView.contentInset.top), animated: true)
     }
     
 //    MARK: - Update UI
@@ -152,10 +173,11 @@ class SpecificDateViewController: UIViewController {
         }
         
         if apod.copyright != nil {
-            copyrightLabel.text = apod.copyright?.trimmingCharacters(in: .whitespacesAndNewlines)
-            print("Copyright Label :\(String(describing: apod.copyright))")
+            let trimmedCopyright = apod.copyright?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let replacedNewlines = trimmedCopyright.replacingOccurrences(of: "\r\n", with: " ").replacingOccurrences(of: "\n", with: " ")
+            copyrightTextView.text = replacedNewlines
         } else {
-            copyrightLabel.text = "No copyright information available"
+            copyrightTextView.text = "No copyright information available"
         }
         
         explanationTextView.text = apod.explanation

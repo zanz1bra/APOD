@@ -14,6 +14,7 @@ class FavoritesTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -65,16 +66,15 @@ class FavoritesTableViewCell: UITableViewCell {
             customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             customImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             customImageView.widthAnchor.constraint(equalToConstant: 50), 
-            customImageView.heightAnchor.constraint(equalTo: customImageView.widthAnchor, multiplier: 1.0),
+            customImageView.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         // Set up constraints for the stack view
         NSLayoutConstraint.activate([
             textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8),
             textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//            textStackView.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
-//            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }
     

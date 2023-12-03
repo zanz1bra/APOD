@@ -31,7 +31,12 @@ class APODViewController: UIViewController {
     
     private let titleLabel: UILabel = UILabel()
     private let dateLabel: UILabel = UILabel()
-    private let copyrightLabel: UILabel = UILabel()
+    
+    private let copyrightTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -76,7 +81,9 @@ class APODViewController: UIViewController {
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(dateLabel)
-        stackView.addArrangedSubview(copyrightLabel)
+        
+        stackView.addArrangedSubview(copyrightTextView)
+        copyrightTextView.isScrollEnabled = false
 
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false // Allow the textView to expand based on content
@@ -120,6 +127,7 @@ class APODViewController: UIViewController {
                 if let error = error {
                     print("Error loading image: \(error.localizedDescription)")
                 }
+                
             }
             
         }
@@ -137,12 +145,20 @@ class APODViewController: UIViewController {
         }
         
         if apod.copyright != nil {
-            copyrightLabel.text = apod.copyright?.trimmingCharacters(in: .whitespacesAndNewlines)
-            print("Copyright Label :\(String(describing: apod.copyright))")
+            let trimmedCopyright = apod.copyright?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let replacedNewlines = trimmedCopyright.replacingOccurrences(of: "\r\n", with: " ").replacingOccurrences(of: "\n", with: " ")
+            copyrightTextView.text = replacedNewlines
         } else {
-            copyrightLabel.text = "No copyright information available"
+            copyrightTextView.text = "No copyright information available"
         }
         
+//        if apod.copyright != nil {
+//            copyrightTextView.text = apod.copyright?.trimmingCharacters(in: .whitespacesAndNewlines)
+//            print("Copyright Label :\(String(describing: apod.copyright))")
+//        } else {
+//            copyrightTextView.text = "No copyright information available"
+//        }
+//        
         explanationTextView.text = apod.explanation
     }
     
