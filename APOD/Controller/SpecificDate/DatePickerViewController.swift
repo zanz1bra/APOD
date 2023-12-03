@@ -43,6 +43,9 @@ class DatePickerViewController: UIViewController {
         doneButton.setTitle("Done", for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         
+        let lastDate = Calendar.current.date(from: DateComponents(year: 1995, month: 6, day: 20)) ?? Date()
+        datePicker.minimumDate = lastDate
+        
         view.addSubview(doneButton)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 20).isActive = true
@@ -56,18 +59,10 @@ class DatePickerViewController: UIViewController {
         
         completionHandler?(datePicker.date)
         
-        // Print debug information
-        print("Is being presented: \(isBeingPresented)")
-        print("Is being dismissed: \(isBeingDismissed)")
-        print("Navigation Controller: \(String(describing: navigationController))")
-        
-        // Create an instance of SpecificDateViewController
         let specificDateViewController = SpecificDateViewController()
-        
-        // Set the date to be displayed in SpecificDateViewController
+
         specificDateViewController.fetchSpecificDateAPOD(date: formattedDate)
-        
-        // Push the SpecificDateViewController onto the navigation stack
+
         navigationController?.pushViewController(specificDateViewController, animated: true)
     }
     
