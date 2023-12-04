@@ -88,7 +88,7 @@ class RandomDateViewController: UIViewController {
         
         title = "Random Date"
         view.backgroundColor = .systemGray
-        navigationController?.navigationBar.tintColor = .label
+        navigationController?.navigationBar.tintColor = UIColor(red: 209/255.0, green: 219/255.0, blue: 189/255.0, alpha: 1.0)
 
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
