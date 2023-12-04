@@ -25,6 +25,7 @@ class RandomDateViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 13.0
         return imageView
     }()
     
@@ -32,15 +33,38 @@ class RandomDateViewController: UIViewController {
         let textView = UITextView()
         textView.isEditable = false
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont(name: "Futura", size: 15)
+        textView.textAlignment = .justified
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        textView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return textView
     }()
     
-    private let titleLabel: UILabel = UILabel()
-    private let dateLabel: UILabel = UILabel()
+    private let titleTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont(name: "Futura", size: 20)
+        textView.textAlignment = .justified
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        textView.textColor = .white
+        return textView
+    }()
+    
+    private let dateLabel: UILabel = {
+        let dateLabel = UILabel()
+        dateLabel.font = UIFont(name: "Futura", size: 13)
+        dateLabel.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        dateLabel.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
+        return dateLabel
+    }()
     
     private let copyrightTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont(name: "Futura", size: 12)
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        textView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return textView
     }()
     
@@ -73,7 +97,9 @@ class RandomDateViewController: UIViewController {
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         
-        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(titleTextView)
+        titleTextView.isScrollEnabled = false
+        
         stackView.addArrangedSubview(dateLabel)
         
         stackView.addArrangedSubview(copyrightTextView)
@@ -85,15 +111,16 @@ class RandomDateViewController: UIViewController {
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        stackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -40).isActive = true
-        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
 
         setupFavoriteButton()
         
         let refreshButton = UIButton()
         refreshButton.setTitle("New picture", for: .normal)
         refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
-        refreshButton.backgroundColor = .black
+        refreshButton.backgroundColor = UIColor(red: 52/255.0, green: 54/255.0, blue: 66/255.0, alpha: 1.0)
+        refreshButton.setTitleColor(UIColor(red: 252/255.0, green: 255/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+        refreshButton.layer.cornerRadius = 13.0
         stackView.addArrangedSubview(refreshButton)
         
         
@@ -134,7 +161,7 @@ class RandomDateViewController: UIViewController {
         }
         print("url.apod")
         
-        titleLabel.text = apod.title
+        titleTextView.text = apod.title
         
         //        Format date
         let dateFormatter = DateFormatter()
@@ -164,13 +191,16 @@ class RandomDateViewController: UIViewController {
         let favoriteButton = UIButton()
         favoriteButton.setTitle("Add to Favorites", for: .normal)
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-        favoriteButton.backgroundColor = .black
+        favoriteButton.backgroundColor = UIColor(red: 52/255.0, green: 54/255.0, blue: 66/255.0, alpha: 1.0)
+        favoriteButton.setTitleColor(UIColor(red: 252/255.0, green: 255/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+        favoriteButton.layer.cornerRadius = 13.0
         stackView.addArrangedSubview(favoriteButton)
     }
     
     @objc func addToFavorites() {
         if let randomAPOD = randomAPOD {
             CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
+            NotificationCenter.default.post(name: .didAddRandomDateToFavorites, object: nil)
         } else {
             print("Error: randomAPOD is nil.")
         }
@@ -183,4 +213,8 @@ class RandomDateViewController: UIViewController {
         print("Refresh button tapped")
     }
     
+}
+
+extension Notification.Name {
+    static let didAddRandomDateToFavorites = Notification.Name("DidAddRandomDateToFavorites")
 }

@@ -19,6 +19,7 @@ class APODViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 13.0
         return imageView
     }()
     
@@ -28,7 +29,7 @@ class APODViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont(name: "Futura", size: 15)
         textView.textAlignment = .justified
-        textView.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         textView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return textView
     }()
@@ -39,7 +40,7 @@ class APODViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont(name: "Futura", size: 20)
         textView.textAlignment = .justified
-        textView.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         textView.textColor = .white
         return textView
     }()
@@ -47,7 +48,7 @@ class APODViewController: UIViewController {
     private let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.font = UIFont(name: "Futura", size: 13)
-        dateLabel.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        dateLabel.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         dateLabel.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return dateLabel
     }()
@@ -56,7 +57,7 @@ class APODViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont(name: "Futura", size: 12)
-        textView.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         textView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return textView
     }()
@@ -99,10 +100,10 @@ class APODViewController: UIViewController {
 
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
-        
-
+    
         stackView.addArrangedSubview(titleTextView)
         titleTextView.isScrollEnabled = false
+        
         stackView.addArrangedSubview(dateLabel)
         
         stackView.addArrangedSubview(copyrightTextView)
@@ -185,12 +186,14 @@ class APODViewController: UIViewController {
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         favoriteButton.backgroundColor = UIColor(red: 52/255.0, green: 54/255.0, blue: 66/255.0, alpha: 1.0)
         favoriteButton.setTitleColor(UIColor(red: 252/255.0, green: 255/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
+        favoriteButton.layer.cornerRadius = 13.0
         stackView.addArrangedSubview(favoriteButton)
     }
     
     @objc func addToFavorites() {
         if let currentAPOD = currentAPOD {
             CoreDataManager.shared.saveToCoreData(apod: currentAPOD)
+            NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
         } else {
             print("Error: currentAPOD is nil.")
         }
@@ -198,6 +201,10 @@ class APODViewController: UIViewController {
     
 }
 
+//MARK: - Notification Center
 
+extension Notification.Name {
+    static let didAddToFavorites = Notification.Name("DidAddToFavorites")
+}
 
 

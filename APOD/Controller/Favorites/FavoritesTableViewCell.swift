@@ -15,6 +15,7 @@ class FavoritesTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 5.0
         return imageView
     }()
     
@@ -46,11 +47,13 @@ class FavoritesTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        styleCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupViews()
+        styleCell()
     }
     
     private func setupViews() {
@@ -76,6 +79,16 @@ class FavoritesTableViewCell: UITableViewCell {
             textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
+    }
+    
+    func styleCell() {
+        contentView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        
+        dateLabel.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        dateLabel.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
+        
+        titleLabel.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        titleLabel.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
     }
     
     func configure(with favorite: FavoriteAPOD) {

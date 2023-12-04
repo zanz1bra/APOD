@@ -14,19 +14,20 @@ class FavoritesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(red: 52/255.0, green: 136/255.0, blue: 153/255.0, alpha: 1.0)
         
         if let apod = apod {
             let titleLabel = UILabel()
             titleLabel.text = apod.title
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 12)
-            titleLabel.textColor = .black
+            titleLabel.font = UIFont(name: "Futura", size: 20)
+            titleLabel.textColor = .white
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(titleLabel)
             
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.cornerRadius = 13.0
             view.addSubview(imageView)
             
             if let imageURL = URL(string: apod.imageUrl!) {
@@ -35,11 +36,13 @@ class FavoritesDetailViewController: UIViewController {
             
             let explanationTextView = UITextView()
             explanationTextView.text = apod.explanation
-            explanationTextView.font = UIFont.systemFont(ofSize: 10)
-            explanationTextView.textColor = .black
+            explanationTextView.font = UIFont(name: "Futura", size: 15)
+            explanationTextView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
             explanationTextView.translatesAutoresizingMaskIntoConstraints = false
             explanationTextView.isEditable = false
             explanationTextView.isScrollEnabled = true
+            explanationTextView.backgroundColor = UIColor(red: 52/255.0, green: 136/255.0, blue: 153/255.0, alpha: 1.0)
+            explanationTextView.textAlignment = .justified
             view.addSubview(explanationTextView)
             
             NSLayoutConstraint.activate([

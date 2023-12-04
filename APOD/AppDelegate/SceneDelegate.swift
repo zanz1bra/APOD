@@ -16,21 +16,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         window = UIWindow(windowScene: windowScene)
         
         let apodViewController = APODViewController()
-        apodViewController.view.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        apodViewController.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        let apodNavigationController = UINavigationController(rootViewController: apodViewController)
+        apodNavigationController.title = "Astronomy Picture of The Day"
 
-        
         let randomDateVC = RandomDateViewController()
-        randomDateVC.view.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
-
+        randomDateVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        let randomDateNavigationController = UINavigationController(rootViewController: randomDateVC)
+        randomDateNavigationController.title = "Random Date"
         
         let favoritesVC = FavoritesTableViewController()
-        favoritesVC.view.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
-
+        favoritesVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        let favoritesNavigationController = UINavigationController(rootViewController: favoritesVC)
+        favoritesNavigationController.title = "Favorites"
         
         let specificDateVC = UINavigationController(rootViewController: DatePickerViewController())
-        specificDateVC.view.backgroundColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
+        specificDateVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        specificDateVC.topViewController?.title = "Specific Date"
 
-        
         apodViewController.setupTabBarItem()
         
         let randomDateImage = UIImage(systemName: "shuffle.circle.fill")?.withRenderingMode(.alwaysTemplate)
@@ -48,8 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.yellow], for: .selected)
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [apodViewController, randomDateVC, favoritesVC, specificDateVC]
-        tabBarController.delegate = self 
+        tabBarController.viewControllers = [apodNavigationController, randomDateNavigationController, favoritesNavigationController, specificDateVC]
+        tabBarController.delegate = self
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
