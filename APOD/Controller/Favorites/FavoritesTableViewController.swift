@@ -16,6 +16,10 @@ class FavoritesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Favorites"
+        view.backgroundColor = .systemGray
+        navigationController?.navigationBar.tintColor = .label
+        
         tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "placeholder")
         
