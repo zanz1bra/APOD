@@ -63,22 +63,16 @@ class FavoritesTableViewCell: UITableViewCell {
         textStackView.addArrangedSubview(dateLabel)
         textStackView.addArrangedSubview(titleLabel)
         
-        // Set up constraints for the image view
-        NSLayoutConstraint.activate([
-            customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            customImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            customImageView.widthAnchor.constraint(equalToConstant: 50), 
-            customImageView.heightAnchor.constraint(equalToConstant: 50),
-        ])
+        customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
+        customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        customImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        customImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        // Set up constraints for the stack view
-        NSLayoutConstraint.activate([
-            textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8),
-            textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-        ])
+        textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8).isActive = true
+        textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
+        
     }
     
     func styleCell() {
