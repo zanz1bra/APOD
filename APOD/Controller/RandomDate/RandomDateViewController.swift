@@ -202,12 +202,30 @@ class RandomDateViewController: UIViewController {
     }
     
     @objc func addToFavorites() {
-        if let randomAPOD = randomAPOD {
-            CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
-            NotificationCenter.default.post(name: .didAddRandomDateToFavorites, object: nil)
-        } else {
-            print("Error: randomAPOD is nil.")
+        guard let randomAPOD = randomAPOD else {
+            print("Error: currentAPOD is nil.")
+            return
         }
+
+        if CoreDataManager.shared.checkIfFavorite(date: randomAPOD.date) {
+            showAlreadyInFavoritesAlert()
+        } else {
+            CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
+            NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
+        }
+    }
+    
+    func showAlreadyInFavoritesAlert() {
+        let alertController = UIAlertController(
+            title: "Already in Favorites",
+            message: "This picture is already in your favorites.",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     

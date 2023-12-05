@@ -69,4 +69,20 @@ class CoreDataManager {
             print("Error deleting from Core Data: \(error.localizedDescription)")
         }
     }
+    
+    //MARK: - Check if favorite is already added
+    
+    func checkIfFavorite(date: String) -> Bool {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<FavoriteAPOD> = FavoriteAPOD.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date)
+        
+        do {
+            let count = try context.count(for: fetchRequest)
+            return count > 0
+        } catch {
+            print("Error checking favorites: \(error.localizedDescription)")
+            return false
+        }
+    }
 }

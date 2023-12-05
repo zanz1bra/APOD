@@ -224,12 +224,30 @@ class SpecificDateViewController: UIViewController {
     }
     
     @objc func addToFavorites() {
-        if let specificDateAPOD = specificDateAPOD {
-            CoreDataManager.shared.saveToCoreData(apod: specificDateAPOD)
-            NotificationCenter.default.post(name: .didAddSpecificDateToFavorites, object: nil)
-        } else {
-            print("Error: specificDateAPOD is nil.")
+        guard let specificDateAPOD = specificDateAPOD else {
+            print("Error: currentAPOD is nil.")
+            return
         }
+
+        if CoreDataManager.shared.checkIfFavorite(date: specificDateAPOD.date) {
+            showAlreadyInFavoritesAlert()
+        } else {
+            CoreDataManager.shared.saveToCoreData(apod: specificDateAPOD)
+            NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
+        }
+    }
+    
+    func showAlreadyInFavoritesAlert() {
+        let alertController = UIAlertController(
+            title: "Already in Favorites",
+            message: "This picture is already in your favorites.",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 
