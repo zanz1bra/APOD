@@ -58,6 +58,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
     // MARK: - UITabBarControllerDelegate
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let randomDateVC = viewController as? RandomDateViewController {
+            randomDateVC.fetchRandomAPOD()
+        }
         performTabSwitchAnimation(from: tabBarController.selectedViewController, to: viewController)
         return true
     }
