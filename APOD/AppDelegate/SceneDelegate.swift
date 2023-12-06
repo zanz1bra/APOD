@@ -15,6 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        
         let apodViewController = APODViewController()
         apodViewController.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         let apodNavigationController = UINavigationController(rootViewController: apodViewController)

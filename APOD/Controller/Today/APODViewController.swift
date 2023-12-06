@@ -77,8 +77,11 @@ class APODViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = false
+        
+        navigationController?.navigationBar.barTintColor = .white
+        
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         setupView()
         fetchAPOD()
         setupTabBarItem()
@@ -88,10 +91,7 @@ class APODViewController: UIViewController {
     
     func setupView() {
         title = "Astronomy Picture of the Day"
-        view.backgroundColor = .systemGray
-        navigationController?.navigationBar.tintColor = .label
 
-        
         // Add scrollView
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
