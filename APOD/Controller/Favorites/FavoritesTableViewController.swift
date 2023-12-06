@@ -58,6 +58,10 @@ class FavoritesTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
             return 1
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if favorites.isEmpty {

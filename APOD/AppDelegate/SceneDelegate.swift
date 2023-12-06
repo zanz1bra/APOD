@@ -18,17 +18,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         let apodViewController = APODViewController()
         apodViewController.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         let apodNavigationController = UINavigationController(rootViewController: apodViewController)
-        apodNavigationController.title = "Astronomy Picture of The Day"
 
         let randomDateVC = RandomDateViewController()
         randomDateVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         let randomDateNavigationController = UINavigationController(rootViewController: randomDateVC)
-        randomDateNavigationController.title = "Random Date"
         
         let favoritesVC = FavoritesTableViewController()
         favoritesVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         let favoritesNavigationController = UINavigationController(rootViewController: favoritesVC)
-        favoritesNavigationController.title = "Favorites"
         
         let specificDateVC = UINavigationController(rootViewController: DatePickerViewController())
         specificDateVC.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
@@ -47,12 +44,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         UITabBar.appearance().tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         UITabBar.appearance().barTintColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
         
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.yellow], for: .selected)
-        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [apodNavigationController, randomDateNavigationController, favoritesNavigationController, specificDateVC]
         tabBarController.delegate = self
+        
+        tabBarController.tabBar.barTintColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        tabBarController.tabBar.tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
@@ -75,7 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         
         UIView.transition(from: fromViewController.view,
                           to: toVC.view,
-                          duration: 0.3,
+                          duration: 0.6,
                           options: [.transitionCrossDissolve],
                           completion: { _ in
             self.switchToTabBarController(toVC, in: currentTabBarController)

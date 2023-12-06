@@ -63,6 +63,7 @@ class SpecificDateViewController: UIViewController {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont(name: "Futura", size: 12)
+        textView.textAlignment = .justified
         textView.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         textView.textColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         return textView
@@ -116,7 +117,7 @@ class SpecificDateViewController: UIViewController {
         setupFavoriteButton()
         
         let datePickerButton = UIButton()
-        datePickerButton.setTitle("Choose Date", for: .normal)
+        datePickerButton.setTitle("Choose A New Date", for: .normal)
         datePickerButton.addTarget(self, action: #selector(datePickerButtonTapped), for: .touchUpInside)
         datePickerButton.backgroundColor = UIColor(red: 52/255.0, green: 54/255.0, blue: 66/255.0, alpha: 1.0)
         datePickerButton.setTitleColor(UIColor(red: 252/255.0, green: 255/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
@@ -130,6 +131,9 @@ class SpecificDateViewController: UIViewController {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
+        
+        let currentDate = Date()
+        datePicker.maximumDate = currentDate
         
         let lastDate = Calendar.current.date(from: DateComponents(year: 1995, month: 6, day: 20)) ?? Date()
         datePicker.minimumDate = lastDate

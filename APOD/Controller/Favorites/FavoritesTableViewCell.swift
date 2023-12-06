@@ -15,7 +15,6 @@ class FavoritesTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5.0
         return imageView
     }()
     
@@ -23,7 +22,7 @@ class FavoritesTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -31,7 +30,7 @@ class FavoritesTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 8)
+        label.font = UIFont(name: "Futura", size: 10)
         return label
     }()
     
@@ -39,9 +38,16 @@ class FavoritesTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont(name: "Futura", size: 13)
         label.numberOfLines = 0
         return label
+    } ()
+    
+    let separatorLine: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
+        return view
     } ()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -59,19 +65,24 @@ class FavoritesTableViewCell: UITableViewCell {
     private func setupViews() {
         contentView.addSubview(customImageView)
         contentView.addSubview(textStackView)
+        contentView.addSubview(separatorLine)
         
         textStackView.addArrangedSubview(dateLabel)
         textStackView.addArrangedSubview(titleLabel)
         
         customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        customImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         customImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         customImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         textStackView.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 8).isActive = true
         textStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
+        textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
     }
     
@@ -99,8 +110,6 @@ class FavoritesTableViewCell: UITableViewCell {
         }
         
         titleLabel.text = favorite.title
-        
-        print("Favorite Title: \(favorite.title ?? "No title")")
-        print("Favorite Date: \(favorite.date ?? "No date")")
+
     }
 }

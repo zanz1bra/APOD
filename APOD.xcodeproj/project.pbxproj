@@ -67,6 +67,14 @@
 			path = RandomDate;
 			sourceTree = "<group>";
 		};
+		2A4C583F2B20998700B88F19 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
 		2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,8 +96,8 @@
 		2AB16EBD2B190CA800BA9CAD /* SpecificDate */ = {
 			isa = PBXGroup;
 			children = (
-				2AB16EBE2B190CDA00BA9CAD /* SpecificDateViewController.swift */,
 				2A865A052B1B53BE000AADD1 /* DatePickerViewController.swift */,
+				2AB16EBE2B190CDA00BA9CAD /* SpecificDateViewController.swift */,
 			);
 			path = SpecificDate;
 			sourceTree = "<group>";
@@ -113,14 +121,14 @@
 		2AEAEF052B14A1B4009F2EB5 /* APOD */ = {
 			isa = PBXGroup;
 			children = (
+				2AF3BA0D2B14A70C00E5F32C /* NetworkManager */,
+				2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */,
 				2AF3BA0A2B14A64200E5F32C /* Model */,
 				2AEAEF1D2B14A22A009F2EB5 /* AppDelegate */,
 				2AEAEF1E2B14A233009F2EB5 /* Controller */,
 				2AEAEF122B14A1B6009F2EB5 /* Assets.xcassets */,
-				2AF3BA0D2B14A70C00E5F32C /* NetworkManager */,
 				2AEAEF142B14A1B6009F2EB5 /* LaunchScreen.storyboard */,
 				2AEAEF172B14A1B6009F2EB5 /* Info.plist */,
-				2A4E2D8A2B150ED70099D2EE /* CoreDataHelper */,
 				2AEAEF0F2B14A1B4009F2EB5 /* APOD.xcdatamodeld */,
 			);
 			path = APOD;
@@ -138,10 +146,10 @@
 		2AEAEF1E2B14A233009F2EB5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2AEAEF0A2B14A1B4009F2EB5 /* APODViewController.swift */,
+				2A4C583F2B20998700B88F19 /* Today */,
 				2A0C5D122B18A84900797FD6 /* RandomDate */,
-				2AB16EBD2B190CA800BA9CAD /* SpecificDate */,
 				2A849C022B17C084006CB746 /* Favorites */,
+				2AB16EBD2B190CA800BA9CAD /* SpecificDate */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

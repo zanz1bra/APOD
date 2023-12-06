@@ -19,7 +19,6 @@ class APODViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 13.0
         return imageView
     }()
     
@@ -155,7 +154,6 @@ class APODViewController: UIViewController {
             }
             
         }
-        print("url.apod")
         
         titleTextView.text = apod.title
         

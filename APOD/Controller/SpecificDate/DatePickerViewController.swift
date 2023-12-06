@@ -14,7 +14,7 @@ class DatePickerViewController: UIViewController {
     private let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
-        picker.preferredDatePickerStyle = .wheels
+        picker.preferredDatePickerStyle = .inline
         return picker
     }()
     
@@ -47,6 +47,8 @@ class DatePickerViewController: UIViewController {
         doneButton.setTitleColor(UIColor(red: 252/255.0, green: 255/255.0, blue: 245/255.0, alpha: 1.0), for: .normal)
         doneButton.layer.cornerRadius = 13.0
         
+        let currentDate = Date()
+        datePicker.maximumDate = currentDate
         
         let lastDate = Calendar.current.date(from: DateComponents(year: 1995, month: 6, day: 20)) ?? Date()
         datePicker.minimumDate = lastDate

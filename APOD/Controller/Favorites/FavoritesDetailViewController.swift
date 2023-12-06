@@ -22,6 +22,7 @@ class FavoritesDetailViewController: UIViewController {
             titleLabel.font = UIFont(name: "Futura", size: 20)
             titleLabel.textColor = .white
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.numberOfLines = 0
             view.addSubview(titleLabel)
             
             let imageView = UIImageView()

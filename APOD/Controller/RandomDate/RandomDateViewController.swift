@@ -25,7 +25,6 @@ class RandomDateViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0).isActive = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 13.0
         return imageView
     }()
     
@@ -163,7 +162,6 @@ class RandomDateViewController: UIViewController {
             }
             
         }
-        print("url.apod")
         
         titleTextView.text = apod.title
         
@@ -232,7 +230,6 @@ class RandomDateViewController: UIViewController {
     //MARK: - Fetching random APOD
     @objc func refreshButtonTapped() {
         fetchRandomAPOD()
-        print("Refresh button tapped")
     }
     
 }
