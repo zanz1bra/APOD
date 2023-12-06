@@ -69,6 +69,12 @@ class APODViewController: UIViewController {
         return stackView
     }()
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
@@ -87,7 +93,7 @@ class APODViewController: UIViewController {
 
         
         // Add scrollView
-        let scrollView = UIScrollView()
+        scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
@@ -177,6 +183,15 @@ class APODViewController: UIViewController {
         explanationTextView.text = apod.explanation
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scrollToTop()
+    }
+    
+    func scrollToTop() {
+        scrollView.setContentOffset(CGPoint(x: 0, y: -scrollView.contentInset.top), animated: true)
+    }
+    
     //MARK: - Core Data
     
     func setupFavoriteButton() {
@@ -200,7 +215,17 @@ class APODViewController: UIViewController {
         } else {
             CoreDataManager.shared.saveToCoreData(apod: currentAPOD)
             NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
+            showAddedToFavorites()
         }
+    }
+    
+    func showAddedToFavorites() {
+        let alertController = UIAlertController(title: "Added to Favorites", message: "This APOD has been added to favorites", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func showAlreadyInFavoritesAlert() {

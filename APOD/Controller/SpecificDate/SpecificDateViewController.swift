@@ -215,6 +215,11 @@ class SpecificDateViewController: UIViewController {
         explanationTextView.text = apod.explanation
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scrollToTop()
+    }
+    
 //    MARK: - Adding to Favorites
     
     func setupFavoriteButton() {
@@ -238,7 +243,17 @@ class SpecificDateViewController: UIViewController {
         } else {
             CoreDataManager.shared.saveToCoreData(apod: specificDateAPOD)
             NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
+            showAddedToFavorites()
         }
+    }
+    
+    func showAddedToFavorites() {
+        let alertController = UIAlertController(title: "Added to Favorites", message: "This APOD has been added to favorites", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func showAlreadyInFavoritesAlert() {

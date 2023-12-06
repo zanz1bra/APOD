@@ -213,7 +213,17 @@ class RandomDateViewController: UIViewController {
         } else {
             CoreDataManager.shared.saveToCoreData(apod: randomAPOD)
             NotificationCenter.default.post(name: .didAddToFavorites, object: nil)
+            showAddedToFavorites()
         }
+    }
+    
+    func showAddedToFavorites() {
+        let alertController = UIAlertController(title: "Added to Favorites", message: "This APOD has been added to favorites", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func showAlreadyInFavoritesAlert() {
