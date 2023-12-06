@@ -138,13 +138,22 @@ class SpecificDateViewController: UIViewController {
         let lastDate = Calendar.current.date(from: DateComponents(year: 1995, month: 6, day: 20)) ?? Date()
         datePicker.minimumDate = lastDate
         
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
+        
+        let pickerContainerView = UIView(frame: CGRect(x: 0, y: 0, width: alertController.view.frame.width - 20, height: 200))
+        pickerContainerView.addSubview(datePicker)
+        
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.centerXAnchor.constraint(equalTo: pickerContainerView.centerXAnchor).isActive = true
+        datePicker.centerYAnchor.constraint(equalTo: pickerContainerView.centerYAnchor).isActive = true
+        
+        alertController.view.addSubview(pickerContainerView)
+        
         let doneAction = UIAlertAction(title: "Done", style: .default) { _ in
             let selectedDate = datePicker.date
             self.fetchSpecificDateAPOD(date: self.formattedDate(selectedDate))
         }
         
-        let alertController = UIAlertController(title: "\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: .actionSheet)
-        alertController.view.addSubview(datePicker)
         alertController.addAction(doneAction)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
