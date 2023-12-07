@@ -45,6 +45,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         tabBarController.viewControllers = [apodNavigationController, randomDateNavigationController, favoritesNavigationController, specificDateVC]
         tabBarController.delegate = self
         
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarAppearance.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
+        
+        UITabBar.appearance().tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
+        UITabBar.appearance().unselectedItemTintColor = .white
+        
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
