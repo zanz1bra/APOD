@@ -14,12 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        
-        UINavigationBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
-        
         let apodViewController = APODViewController()
         apodViewController.view.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         let apodNavigationController = UINavigationController(rootViewController: apodViewController)
@@ -46,15 +41,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UITabBarControllerDeleg
         favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: favoritesImage, selectedImage: nil)
         specificDateVC.tabBarItem = UITabBarItem(title: "Specific Date", image: specificDateImage, selectedImage: nil)
         
-        UITabBar.appearance().tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
-        UITabBar.appearance().barTintColor = UIColor(red: 41/255.0, green: 50/255.0, blue: 65/255.0, alpha: 1.0)
-        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [apodNavigationController, randomDateNavigationController, favoritesNavigationController, specificDateVC]
         tabBarController.delegate = self
-        
-        tabBarController.tabBar.barTintColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
-        tabBarController.tabBar.tintColor = UIColor(red: 242/255.0, green: 235/255.0, blue: 199/255.0, alpha: 1.0)
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

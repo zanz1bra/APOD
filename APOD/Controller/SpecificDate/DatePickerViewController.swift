@@ -37,8 +37,8 @@ class DatePickerViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(datePicker)
-        datePicker.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         
+        datePicker.backgroundColor = UIColor(red: 62/255.0, green: 96/255.0, blue: 111/255.0, alpha: 1.0)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datePicker.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
