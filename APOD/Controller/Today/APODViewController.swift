@@ -156,13 +156,13 @@ class APODViewController: UIViewController {
         
         if let imageUrl = URL(string: apod.url) {
             print("Image URL: \(imageUrl)")
-            imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
+            imageView.sd_setImage(with: imageUrl, placeholderImage: nil, options: .continueInBackground, completed: { (image, error, cacheType, url) in
                 self.activityIndicator.stopAnimating()
                 
                 if let error = error {
                     print("Error loading image: \(error.localizedDescription)")
                 }
-            }
+            })
         }
         
         imageView.image = nil
