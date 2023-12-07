@@ -117,7 +117,8 @@ class RandomDateViewController: UIViewController {
         explanationTextView.isScrollEnabled = false
         
         stackView.addArrangedSubview(activityIndicator)
-        activityIndicator.startAnimating()
+//        activityIndicator.startAnimating()
+        view.bringSubviewToFront(activityIndicator)
         
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
