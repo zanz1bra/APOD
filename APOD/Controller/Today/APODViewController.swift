@@ -75,6 +75,13 @@ class APODViewController: UIViewController {
         return scrollView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -97,6 +104,9 @@ class APODViewController: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         scrollView.addSubview(stackView)
+        
+        stackView.addArrangedSubview(activityIndicator)
+        activityIndicator.startAnimating()
 
         stackView.addArrangedSubview(imageView)
         imageView.contentMode = .scaleAspectFit
@@ -141,6 +151,19 @@ class APODViewController: UIViewController {
     
     func updateUI(with apod: APOD) {
         currentAPOD = apod
+        
+        activityIndicator.startAnimating()
+        
+        if let imageUrl = URL(string: apod.url) {
+            print("Image URL: \(imageUrl)")
+            imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
+                self.activityIndicator.stopAnimating()
+                
+                if let error = error {
+                    print("Error loading image: \(error.localizedDescription)")
+                }
+            }
+        }
         
         imageView.image = nil
         

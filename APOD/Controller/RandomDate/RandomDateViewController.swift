@@ -75,6 +75,13 @@ class RandomDateViewController: UIViewController {
         return stackView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -108,6 +115,9 @@ class RandomDateViewController: UIViewController {
         
         stackView.addArrangedSubview(explanationTextView)
         explanationTextView.isScrollEnabled = false
+        
+        stackView.addArrangedSubview(activityIndicator)
+        activityIndicator.startAnimating()
         
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -148,6 +158,19 @@ class RandomDateViewController: UIViewController {
     
     func updateUI(with apod: APOD) {
         randomAPOD = apod
+        
+        activityIndicator.startAnimating()
+        
+        if let imageUrl = URL(string: apod.url) {
+            print("Image URL: \(imageUrl)")
+            imageView.sd_setImage(with: imageUrl) { (image, error, cacheType, url) in
+                self.activityIndicator.stopAnimating()
+                
+                if let error = error {
+                    print("Error loading image: \(error.localizedDescription)")
+                }
+            }
+        }
         
         imageView.image = nil
         
